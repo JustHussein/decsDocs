@@ -1,0 +1,82 @@
+# GIT and github
+
+chapter 1:
+
+- download GIT for local use from https://git-scm.com/
+- after install i should config git (pick a username for myself) by these command:
+```
+- git config --global user.name "justhussein" 
+- git config --global user.email "h.mirzaei.eng@gmail.com"
+```
+- git init:    creeate repository: repository is like a folder wich we store our code into  it. for create a repository i go to the directory in my local drive and run cmd and then create repo by this command: 
+```
+- git init 
+```
+after that, the directory will created with .git name 
+
+- command   git status  show the state of your local repo
+```
+On branch master 
+No commits yet 
+Untracked files: 
+  (use "git add <file>..." to include in what will be committed) 
+        site1/ 
+        tamarin/ 
+nothing added to commit but untracked files present (use "git add" to track)
+```
+i have 2 folder in this repo wiche untracked and should track them manualy.
+
+- Stage:    track files by this command: prepare files to be commit
+```
+- git add site1
+- git add tamrin
+OR
+- git add --a
+```
+
+- Commit:    after i staged(track) all file that i wanted, i should comittt them: commited file is like resore point for that file. whenever i change this file and it's be usless, i can use the commited point and restore it.
+```
+- git commit -m"init commit"
+```
+-m in above code mean message.
+
+- after we modified a file we can trat in 2 ways:
+	- git add file then git commit file
+	- or git commit file
+- in fact by git add i choose the files wich i wann commited. if i use commit all files will be satged(cached) to be commited.
+- create a repository in github
+- create connection between local machine and github by this command: origin is my connection name
+```
+- git remote add origin https://github.com/JustHussein/test.git
+```
+
+- Push:    after create connection ican send from my local repo to cloud repo by this command:
+```
+- git push origin master
+```
+after this i should enter my username and pass.
+
+- Clone:    after all this i can get a repo from cloud  to my local  by this command:
+```
+- git clone https://github.com/JustHussein/test.git
+```
+
+- Branch:   
+	- git branch:    for showing active branch
+	- create branch :
+```
+- git branch branch-name
+```
+	- switch branch:
+```
+- git switch branch-name
+```
+	- delete branch
+```
+- git branch -d branch-name
+```
+
+- merge:    first go to master branch then enter below code:
+```
+- git merge branch-name
+```

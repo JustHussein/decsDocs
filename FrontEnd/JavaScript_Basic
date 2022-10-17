@@ -1,0 +1,480 @@
+# JavaScript Basic
+
+## goals
+
+1. input and output
+2. variables
+3. condition
+4. loops
+5. arrays
+6. object in javascript
+7. OOP
+8. methods
+
+### What's javascript
+
+javascript is a scripting language(just-in-time compilation). it's run in client side. it's limit on web browser and under browser limitation in front-end. in back-end limit on node-js.
+javascript is object base not object oriented.
+
+### Keys of Variables
+
+1. let a =5.5;
+2. const PI=3.14; //
+3. var b=7;
+
+these  command is optional if we don't use :
+```"use strict";```
+
+- var is global, if we declare it in a function its valid in outermost function if not is a global
+- let or const: valid in block code.
+
+### 2 major of variable
+
+1. primitive: like numbers, strings, boolean, ...
+2. objects: like other languages
+the primitives are immutable: imagine we have string like "he is sad" and you try to change 6th letter,you wont be able to change it.
+
+you should behave like this:
+
+```
+wrong way:
+let str = "He is sad"; 
+console.log(str[6]);// output will be:s 
+str[6] = 'b';//does NOT work! 
+console.log(str);// output will be:He is sad
+
+correct way:
+let str = "He is sad"; 
+console.log(str); 
+str = "He is bad"; 
+console.log(str);
+```
+
+### Basic input and output
+
+```
+window.alert("Use alert to show simple massage");
+answer = window.confirm("Do you accept this challenge?");
+input = window.prompt("What is your name?");
+// get input in quera
+var name = readline();
+```
+
+### Conditions
+
+- **if , else ,else if example:**
+
+```
+let score = 16;
+
+if (score<10) {
+    console.log("you failed.");
+}else{
+    console.log("you succeed.");
+}
+
+
+if (score<10) {
+    
+    console.log("faild");
+    
+} else if(score <16 ){
+    
+    console.log("passed");
+    
+} else {
+    
+    console.log("great!");
+    
+}
+```
+
+one line condition\
+<span style="color:green">condition ? "true statement" : "false statement"</span>
+
+```
+let score = 9; 
+score <10 ? window.alert("faild"):window.alert("succed");
+
+professional:
+const testScore = 60; 
+let grade = (testScore >= 90) ? console.log('Grade A') 
+            : (testScore >= 70) ? console.log('Grade B') 
+            : (testScore >= 50) ? console.log('Grade C') 
+            : console.log('Grade D');
+```
+
+- **Switch**
+
+```
+switch(expression) { 
+  case x: 
+    // action for x 
+    break; 
+  case y: 
+    // action for y 
+    break; 
+  default: 
+    // action for others 
+}
+```
+
+example:
+
+```
+let day; 
+switch (new Date().getDay()) { 
+    case 0: 
+       day="شنبه"  
+        break; 
+    case 1: 
+        day="یکشنبه"  
+        break; 
+    case 2: 
+        day="دوشنبه"  
+        break; 
+    case 3: 
+        day="سه‌شنبه"  
+        break; 
+    case 4: 
+        day="چهارشنبه"  
+        break; 
+    case 5: 
+        day="پنجشنبه"  
+        break; 
+    case 6: 
+        day="جمعه"  
+        break; 
+} 
+window.alert(day);
+```
+
+### Loops
+
+- for
+- for/in
+- for/of
+- while
+- do/while
+
+```
+///////////if
+let isAge = 30, isEyeSight = 0.75; 
+if (isAge >= 18 && isEyeSight >= 0.5) { 
+  console.log('Issue Driving Licence'); 
+} else { 
+  console.log('Un-Authorized Candidate'); 
+}
+
+///////////pro if
+const testScore = 60; 
+let grade = (testScore >= 90) ? console.log('Grade A') 
+            : (testScore >= 70) ? console.log('Grade B') 
+            : (testScore >= 50) ? console.log('Grade C') 
+            : console.log('Grade D');
+
+///////////for
+for (let count = 1; count < 10; count++) { 
+  if (count % 5 == 0) { 
+    break; 
+  } 
+  console.log('Value: ' + count); 
+}
+
+///////////pro if
+for (let count = 1; count < 10; count++) { 
+  if (count % 5 == 0) { 
+    continue; 
+  } 
+  console.log('Value: ' + count); 
+}
+
+///////////while
+let count = 0; 
+let total = 0; 
+while (count < 3) { 
+  count++; 
+  total += count; 
+  console.log(count + '\t\t' + total); 
+}
+
+///////////do while
+let count = 0; 
+do { 
+ count += 1; 
+ console.log(count); 
+} while (count < 5);
+```
+
+## **Functions(Methods)**
+
+- basic function
+
+```
+function function_name (parameters){
+    expressions;
+}
+```
+
+access  arguments: with this code you can get all arguments that get in function parameters.
+
+```
+function add() { 
+ let sum = 0; 
+ for (let i = 0; i < arguments.length; i++) { 
+ sum += arguments[i]; 
+ } 
+ return sum; 
+} 
+console.log(add(10, 5, 20));
+```
+
+- recursive functions
+
+```
+function factorial(n) { 
+  if ((n === 0) || (n === 1)) { 
+    return 1; 
+  } 
+  else { 
+    return (n * factorial(n - 1)); 
+  } 
+} 
+console.log(factorial(3));
+```
+
+- function in function(closure)
+
+```
+const person = function(name) { 
+  let age; 
+  return { 
+    setName: function(newName) { 
+      name = newName; 
+    }, 
+    getName: function() { 
+      return name; 
+    }, 
+    getAge: function() { 
+      return age; 
+    }, 
+    setAge: function(newAge) { 
+      age = newAge; 
+    }, 
+  }; 
+}; 
+let p1 = person("Ali"); 
+console.log(p1.getName()); 
+p1.setName("Hamid"); 
+p1.setAge(30); 
+console.log(p1.getAge()); 
+console.log(p1.getName());
+```
+
+### strings
+
+- concat or +
+- charAt
+- indexOf
+- lastindexOf
+- includes
+- startsWith/endsWith
+- trim
+- substring
+- split
+- replace
+- toLowecase/toUpperCase
+
+### Arrays
+
+most important method is:
+
+1. map
+2. filter
+3. forEach
+
+- Concat: add secound array at the end of first array.
+
+```
+const colors_1 = ["red", "blue", "green"]; 
+const colors_2 = ["black", "white", "teal"]; 
+const colors_3 = colors_1.concat(colors_2); 
+console.log(colors_3);
+```
+
+- spread: put multiple arrays in one array
+
+```
+const colors_1 = ["red", "blue", "green"]; 
+const colors_2 = ["black", "white", "teal"]; 
+const colors_3 = [...colors_1, ...colors_2]; 
+console.log(colors_3);
+```
+
+refrece type (functions, objects, arrays) :arrays in js are refrece type which mean if array placed equal to another array, both arrays adresses are same nad if change each one of the first array, the secound array was changed cuz of address.
+primitive (boolean, null, undifined, String, Number ):  if you place equal 2 variable, if you change one of them the other variable doesn.t change. variable contain value not address.
+
+- forEach(method): we can move on arrays by this method.
+
+```
+const colors = ["red", "blue", "green"]; 
+colors.forEach(function(color, index) { 
+  console.log(index, color); 
+});
+```
+
+- push(method): add new item at the end of array.
+
+```
+const colors = ["red", "blue", "green"]; 
+colors.push("white");
+
+or
+const colors = ["red", "blue", "green"]; 
+colors[colors.length] = "white"; 
+console.log(colors);
+```
+
+- pop(method): seprate the last item in arrays.
+
+```
+const colors = ["red", "blue", "green"]; 
+const removedColor = colors.pop(); 
+console.log(removedColor); 
+console.log(colors);
+```
+
+- shift (method): return the first array item and then remove it
+
+```
+const colors = ["red", "blue", "green"]; 
+const removedColor = colors.shift(); 
+console.log(removedColor); 
+console.log(colors);
+```
+
+- unshift(method): add new item from firs palce in arrays
+
+```
+const colors = ["red", "blue", "green"]; 
+colors.unshift("white"); 
+console.log(colors);
+```
+
+- sort(method):
+
+```
+let colors = [5,9,10,11,1,999]; 
+colors.sort(); 
+console.log(colors);
+
+colors.sort((a, b) => b - a);//descending
+console.log(colors);
+```
+
+- map(method): go on the arrays and make new array
+
+```
+const numbers = [1, 2, 3, 4]; 
+const newNumbers = numbers.map(num => num * num); 
+console.log(newNumbers);
+```
+
+- find(method):  return the first item in array that math with  condition:
+- findIndex:
+
+```
+const numbers = [4, 10, 12, 5, 6, 2, -1]; 
+const found = numbers.find((num) => num > 10);
+const foundIndex = numbers.findIndex((num) => num > 10);
+console.log(found);
+console.log(foundIndex);
+```
+
+- indexOf and lastIndexOf:
+
+```
+const colors = ["red", "blue", "green", "red"]; 
+const colorIdx = colors.indexOf("red"); 
+const colorIdy = colors.indexOf("red",  2);//the secound parameter is for starting search 
+const colorIdz = colors.indexOf("black"); 
+const colorIdn = colors.lastIndexOf("red"); 
+console.log(colorIdx); 
+console.log(colorIdy); 
+console.log(colorIdz); 
+console.log(colorIdn);
+```
+
+- filter(method): return an array with all item that contain condtion
+
+```
+const languages = ["java", "oracle", "javascript", "kotlin", "dart", "c"]; 
+function desiredLanguage(language) { 
+  return language.length > 4; 
+} 
+const result = languages.filter(desiredLanguage); 
+console.log(result);
+```
+
+- includes(method):
+
+```
+const colors = ["red", "blue", "green", "red"]; 
+console.log(colors.includes("red")); 
+console.log(colors.includes("black"));
+```
+
+- reverse(method):
+
+```
+const colors = ["red", "blue", "green", "red"]; 
+colors.reverse(); 
+console.log(colors);
+```
+
+- join(method):
+
+```
+const colors = ["red", "blue", "green", "red"]; 
+console.log(colors.join(','));
+```
+
+- slice(method):
+
+```
+const colors = ["red", "blue", "green", "red"]; 
+const newColors_1 = colors.slice(1); 
+const newColors_2 = colors.slice(1, 3); 
+console.log(newColors_1); 
+console.log(newColors_2);
+```
+
+- splice(method): get start index for deleting and number of delete and then get new item
+
+```
+const colors = ["red", "blue", "green", "red"]; 
+colors.splice(1, 2, "yellow", "black"); 
+console.log(colors);
+```
+
+- some(method): if one array item be ok with condition then return true
+- every(method): if all item in array is ok by this condition then return true
+
+```
+let numbers = [0, 2, 4]; 
+let even = (num) => num % 2 === 0; 
+let odd = (num) => num % 2 !== 0; 
+console.log(numbers.some(even)); 
+console.log(numbers.some(odd)); 
+numbers = [0, 2, 3, 4]; 
+even = (num) => num % 2 === 0; 
+console.log(numbers.every(even));
+```
+
+### Set(S):
+
+- declare: with constraction function(set) and new operator
+
+```
+let varName = new set()
+```

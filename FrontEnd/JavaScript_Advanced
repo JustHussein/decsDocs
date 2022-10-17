@@ -1,0 +1,71 @@
+# Advanced Javascript
+
+## RegEx: Regular Expression
+
+it's a string which we can search in strings with that.
+Example: check mobile phone
+
+```
+^09\d{9}
+09174444444
+```
+
+for more info check: regexr.com  or quera
+
+- use RegEx in JavaScript:
+each regex has 2 part:
+
+1. pattern
+2. flag
+we can declare regex in 2 shape: Literal &  constructor function
+
+```
+let regex1 = /Quera/i; 
+let regex2 = new RegExp('Quera' , 'i');
+```
+
+- method  of regex
+
+ 1. test
+
+```
+let reg = /javascript/;
+reg.test('Hello, welcome to JavaScript!');
+// false
+reg.test('Hello, welcome to javascript!');
+//true
+```
+
+2. exec: return index in kid of array
+
+```
+let reg = /javascript/i;
+reg.exec('Hello, welcome to JavaScript!');
+// ["JavaScript", index: 18, input: "Hello, welcome to JavaScript!"]
+reg.exec('Hello, welcome to javascript!');
+// ["javascript", index: 18, input: "Hello, welcome to javascript!"]
+```
+3.  match:
+
+```
+let str = 'JavaScript!';
+str.match(/[aeiou]/g);
+//["a", "a", "i"]
+```
+4.  search: with this method you can see the index of matched regex.
+
+```
+let str = 'JavaScript!';
+str.search(/[aeiou]/);
+// 1
+str.search(/ruby/);
+// -1
+```
+
+5. replace:
+```let str = 'JavaScript!';
+str.replace(/[aeiou]/ , '*');
+← "J*vaScript!"
+str.replace(/[aeiou]/g , '*');
+← "J*v*Scr*pt!"
+```
