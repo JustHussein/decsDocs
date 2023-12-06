@@ -1,0 +1,30 @@
+ALTER DATABASE testgo SET ENABLE_BROKER with rollback immediate;
+
+CREATE QUEUE dbo.notifitems;
+-----------------------
+CREATE SERVICE notifitems
+ON QUEUE dbo.notifitems ([DEFAULT]);
+
+-------------------------
+CREATE TRIGGER tr_RecordInserted
+ON [dbo].[items]
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @message_body nvarchar(MAX);
+    DECLARE @dialog_handle UNIQUEIDENTIFIER;
+
+    -- Create a message with the inserted data
+    BEGIN DIALOG CONVERSATION @dialog_handle
+        FROM SERVICE notifitems
+        TO SERVICE 'notifitems'
+        ON CONTRACT [DEFAULT]
+        WITH ENCRYPTION = OFF;
+
+    SELECT @message_body = (SELECT top 1 * FROM [dbo].[items]  order by id desc FOR XML AUTO, BINARY BASE64);
+
+    SEND ON CONVERSATION @dialog_handle
+        MESSAGE TYPE [DEFAULT] (@message_body);
+
+    END CONVERSATION @dialog_handle;
+END;
