@@ -1,0 +1,48 @@
+import requests
+import json
+
+
+url = "https://core.eduix.msrt.ir"
+headers = {
+    "Content-Type": "application/json",
+    "Cookie": "cookiesession1=678B288D2551DACBE64A24FF2C5A5A41"
+}
+
+data = {
+    "credential": {
+        "code": "msrt",
+        "password": "b20114822e1baf5faa21b3441659d0980771196e78ba746de2b9470749ced854"
+    },
+    "parameters": [
+        {
+            "parameterName": "nationalCode",
+            "parameterValue": "3380167843"
+        }
+    ],
+    "service": "cloudSrv-inq"
+}
+
+# Make a POST request
+response = requests.post(url, headers=headers, json=data)
+
+
+response_dict = json.loads(response.text)
+response_text = response_dict.get('responseText','')
+response_text_list = json.loads(response_text) if response_text else []
+
+if response_text_list:
+    first_element = response_text_list[0]  # Access the first element
+    person_info = first_element.get('personInfo', {})  # Access 'personInfo' within the first element
+    first_name = person_info.get('firstName', '')
+
+all_student_uni_info = []
+for data in response_text_list:
+    studentUniInfo = data.get('studentUniInfo', {})
+    all_student_uni_info.append(studentUniInfo)
+# Print the results
+#print("responseText:", response_text)
+print("personInfo:", person_info)
+print("firstName:", first_name)
+
+for student_uni_info in all_student_uni_info:
+    print("studentUniInfo:", student_uni_info)
